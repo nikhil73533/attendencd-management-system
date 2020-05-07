@@ -48,7 +48,7 @@ public String user;
         repass = new javax.swing.JTextField();
         reset = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        veryfy = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,9 +79,9 @@ public String user;
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Verify Password:-");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        veryfy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                veryfyActionPerformed(evt);
             }
         });
 
@@ -101,7 +101,7 @@ public String user;
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(veryfy))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,7 +118,7 @@ public String user;
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(veryfy, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(reset)
                 .addGap(75, 75, 75))
@@ -140,7 +140,7 @@ public String user;
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
       
-       if(repass.getText()==jTextField1.getText()){
+       if(repass.getText().equals(veryfy.getText())){
            System.out.println("OK1");
        String updateQuery = "update root.regrestration set PASWORD = ? WHERE  EMAIL= ?";
            try {
@@ -174,9 +174,9 @@ public String user;
         // TODO add your handling code here:
     }//GEN-LAST:event_repassActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void veryfyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_veryfyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_veryfyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,8 +217,8 @@ public String user;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField repass;
     private javax.swing.JButton reset;
+    private javax.swing.JTextField veryfy;
     // End of variables declaration//GEN-END:variables
 }
