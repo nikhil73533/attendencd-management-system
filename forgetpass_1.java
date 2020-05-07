@@ -5,6 +5,9 @@
  */
 package testapplication;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +26,8 @@ import javax.swing.JOptionPane;
  * @author nikhil
  */
 public class forgetpass_1 extends javax.swing.JFrame {
-int randomcode;
+   int randomcode;
+
     /**
      * Creates new form forgetpass_1
      */
@@ -42,13 +46,15 @@ int randomcode;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        verify = new javax.swing.JLabel();
+        VERIFY = new javax.swing.JTextField();
         useremail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -59,13 +65,13 @@ int randomcode;
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Enter email:-");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("password:-");
+        verify.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verify.setForeground(new java.awt.Color(255, 255, 255));
+        verify.setText("VERIFYCODE:-");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        VERIFY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                VERIFYActionPerformed(evt);
             }
         });
 
@@ -113,6 +119,12 @@ int randomcode;
             }
         });
 
+        email.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        email.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -121,27 +133,32 @@ int randomcode;
                 .addContainerGap(236, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(209, 209, 209))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(useremail, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(useremail, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(verify)
+                        .addGap(18, 18, 18)
+                        .addComponent(VERIFY, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,20 +166,24 @@ int randomcode;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(116, 116, 116)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(useremail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(useremail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(verify)
+                            .addComponent(VERIFY, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -180,16 +201,16 @@ int randomcode;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void VERIFYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VERIFYActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_VERIFYActionPerformed
 
     private void useremailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useremailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_useremailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     if( Integer.parseInt(useremail.getText())== randomcode){
+     if( Integer.parseInt(VERIFY.getText())== randomcode){
          Reset rs = new Reset(useremail.getText());
            rs.setVisible(true);
         rs.pack();
@@ -204,10 +225,27 @@ int randomcode;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
         try{
-        codegen ccd = new codegen();
-        randomcode = ccd.code();
-        String host = "stmt.gmail.com";
+            
+                 String email = useremail.getText();
+                 System.out.println("OK1");
+             
+             String query  = "SELECT * FROM ROOT.REGRESTRATION WHERE EMAIL = ?";
+             java.sql.Connection con  = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+             
+            PreparedStatement stmt  = con.prepareStatement(query);
+            ResultSet rs;
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+           while(rs.next()){
+          System.out.println("OK2");
+           if(email.equals(rs.getString("EMAIL"))){
+               System.out.println("OK3");
+               try{
+                    codegen random= new codegen();
+                    randomcode = random.code();
+               String host = "smtp.gmail.com";
         String user  = "ng7873301@gmail.com";
         String pass=  "ashok1370";
         String to = useremail.getText();
@@ -217,13 +255,17 @@ int randomcode;
         Properties prt = System.getProperties();
         prt.put("mail.smtp.starttls.enable","true");
         prt.put("mail.smtp.host", "host");
-        prt.put("mail.smtp.port","587");
+        prt.put("mail.smtp.port","465");
         prt.put("mail.smtp.auth", "true");
         prt.put("mail.smtp.starttls.required","true");
+         prt.put("mail.smtp.socketFactory.port", 465);
+        prt.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prt.put("mail.smtp.socketFactory.fallback", "false");
+        
        java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-        Session mailSession = Session.getDefaultInstance(prt,null);
-        mailSession.setDebug(sessionDebuge);
-        Message msg = new MimeMessage(mailSession);
+        Session session = Session.getDefaultInstance(prt,null);
+        session.setDebug(sessionDebuge);
+        Message msg = new MimeMessage(session);
     
         msg.setFrom(new InternetAddress(user));
   
@@ -232,15 +274,42 @@ int randomcode;
         msg.setRecipient(Message.RecipientType.TO,  new InternetAddress(to));
         msg.setSubject(subject);
         msg.setText(message);
-        Transport transport = mailSession.getTransport("smtp");
-        transport.connect();
+        msg.saveChanges();
+         Transport transport =  session.getTransport("smtp");
+        transport.connect(host,user,pass);
         transport.sendMessage(msg,msg.getAllRecipients());
         transport.close();
         JOptionPane.showMessageDialog(null,"code has been send to email");
-        }catch(Exception ex){
-            System.out.println(ex);
-        }
+      
         
+               
+               
+           }  catch (MessagingException ex) {
+        Logger.getLogger(forgetpass_1.class.getName()).log(Level.SEVERE, null, ex);
+    
+            
+           }
+              
+            
+           }
+          else{
+               forgetpass_1 ps =new  forgetpass_1();
+                    ps.email.setText("invalid email address");   
+                    
+                       }  
+    }
+       
+        } catch (SQLException ex) {
+        Logger.getLogger(forgetpass_1.class.getName()).log(Level.SEVERE, null, ex);
+    }
+            
+            
+            
+            
+            
+            
+       
+       
         
         
         
@@ -293,14 +362,16 @@ int randomcode;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField VERIFY;
+    public javax.swing.JLabel email;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField useremail;
+    private javax.swing.JLabel verify;
     // End of variables declaration//GEN-END:variables
 }

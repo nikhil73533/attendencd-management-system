@@ -16,13 +16,51 @@ import static javax.swing.UIManager.getString;
  * @author nikhil
  */
 public class lgform extends javax.swing.JFrame {
-
+testclass tt = new testclass();
     /**
      * Creates new form loginefom
      */
     public lgform() {
+     
         initComponents();
     }
+     boolean onetimeapprience() throws SQLException{
+        boolean str = false;
+     String que  = "SELECT FATHERNAME FROM  ROOT.REGRESTRATION WHERE USERNAME = '"+ username.getText()+"'";
+            String col = "FATHERNAME";
+           String rollnumber= tt.adminuser(que, col);
+      
+       
+      String query  = "SELECT * FROM ROOT.STUDENTS WHERE ROLLNUMBER = ?";
+             java.sql.Connection con  = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+            PreparedStatement stmt  = con.prepareStatement(query);
+            ResultSet rs;
+            stmt.setString(1, rollnumber);
+      
+           
+
+            rs = stmt.executeQuery();
+              while (rs.next()){
+              
+               if(rs.getString(2).equals(rollnumber)){
+                   str = true;
+                      JOptionPane.showMessageDialog(this, "WELCOME....."); 
+                      
+                break;
+               }
+                 else{
+                   str = false;
+                JOptionPane.showMessageDialog(null," ");
+                    break;
+            }}
+            
+           
+            stmt.close();
+            con.close();
+                 return str;
+       
+        } 
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -302,6 +340,7 @@ public class lgform extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
+        
         String option = jComboBox1.getSelectedItem().toString();
         if(username.equals("")||password.equals("")||option.equals("SELECT")){
          JOptionPane.showMessageDialog(this, "Some feild are Empity");
@@ -323,7 +362,9 @@ public class lgform extends javax.swing.JFrame {
                 String pi = "USER";
                if(rs.getString(3).equals(user)&& rs.getString(4).equals(pass)){
                    if(si.equals(option)){
+                       
                     JOptionPane.showMessageDialog(this, "logine successfully");
+                    
                     Admin ad = new Admin();
                      ad.setLocationRelativeTo(null);
                     ad.setVisible(true);
@@ -334,6 +375,7 @@ public class lgform extends javax.swing.JFrame {
                 
                    else if(pi.equals(option)){
                         JOptionPane.showMessageDialog(this, "logine successfully");
+                        if(onetimeapprience()!=true){
                          codepanal cd = new codepanal();
                           cd.setLocationRelativeTo(null);
                     cd.setVisible(true);
@@ -341,7 +383,21 @@ public class lgform extends javax.swing.JFrame {
                    cd.USERN.setText(username.getText());
                     dispose();
                          break;
-                   }
+                        }
+                        else{
+                            String que  = "SELECT FATHERNAME FROM  ROOT.REGRESTRATION WHERE USERNAME = '"+ username.getText()+"'";
+            String col = "FATHERNAME";
+        String    idnumber = tt.adminuser(que, col);
+            String quer = "SELECT DOB FROM  ROOT.REGRESTRATION WHERE  USERNAME= '"+ username.getText()+"'";
+            String co= "DOB";
+            String ogr = tt.adminuser(quer, co);
+                         DESHBORDPANAL des = new DESHBORDPANAL();
+                    des.setVisible(true);
+                    setVisible(false);
+                    des.idnum.setText(idnumber);
+                   des.OG.setText(ogr);
+                 
+                        }}
                    else{
                    
                 JOptionPane.showMessageDialog(null,"Login Fail......");
@@ -392,6 +448,7 @@ public class lgform extends javax.swing.JFrame {
     private void FPASSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FPASSMouseClicked
        forgetpass_1 fg = new forgetpass_1();
     
+       
        fg.setVisible(true);
        fg.pack();
        fg.setLocationRelativeTo(null);

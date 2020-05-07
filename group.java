@@ -43,7 +43,7 @@ ArrayList<user> userList = null;
                 rs = (ResultSet) stmt.executeQuery(query);
                  
                  while(rs.next()){
-                     user = new user(rs.getString("GROUPNAME"),rs.getInt("GROUPCODE"));
+                     user = new user(rs.getString("GROUPNAME"),rs.getInt("GROUPCODE"),rs.getString("FACUILTY"));
                      userList.add(user);
                  }
                 

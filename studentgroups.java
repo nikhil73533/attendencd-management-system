@@ -5,10 +5,12 @@
  */
 package testapplication;
 
+import java.util.Properties;
+
 /**
  *
  * @author nikhil
  */
-class DriverManager {
+public class studentgroups {
     
 }

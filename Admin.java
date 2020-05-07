@@ -5,6 +5,8 @@
  */
 package testapplication;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.UIManager.getString;
@@ -21,7 +23,7 @@ REG or = new REG();
      */
     public Admin() {
         initComponents();
-        this.setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -214,34 +216,45 @@ REG or = new REG();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        
-        
+               
+   
+        System.out.println("OK1");
          user = UNAME.getText();
         String Pass = UPASS.getText();
          if(user.equals("")||Pass.equals("")){
+                     System.out.println("OK2");
          JOptionPane.showMessageDialog(this, "Some feild are Empity");
         }
         else{
         try {
              String query  = "SELECT * FROM ROOT.ADMINLOGINE WHERE USERNAME = ? AND PASSWORD = ?";
              java.sql.Connection con  = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+              System.out.println("OK3");
             PreparedStatement stmt  = con.prepareStatement(query);
             ResultSet rs;
             stmt.setString(1, user);
             stmt.setString(2,Pass);
-              String quer = "SELECT code FROM  ROOT.ADMINLOGINE WHERE  CODE= '"+ UNAME.getText()+"'";
-               String col = "CODE";
-               String cd = td.adminuser(quer, col);
+          
+               
 
             rs = stmt.executeQuery();
               while (rs.next()){
-              
+                          System.out.println("OK3.1");
+                          
                if(rs.getString(1).equals(user)||rs.getString(2).equals(Pass)){
+                           System.out.println("Ok4");
                       JOptionPane.showMessageDialog(this, "logine successfully.....");
-                dispose();
+             
                ADMININTERFACE ai  = new ADMININTERFACE();
+               String code = rs.getString(3);
+               String org = rs.getString("ORGANIZATION");
+               ai.COD.setText(code);
+               ai.jLabel10.setText(org);
                 ai.setVisible(true);
+                
                 setVisible(false);
-              ai.COD.setText(cd);
+                 String cd;
+         
              
                 String orgi = or.org;
                

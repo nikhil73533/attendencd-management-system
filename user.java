@@ -12,9 +12,11 @@ package testapplication;
 class user {
     private String  group;
     private int gcode;
-    public user(String Group,int gcode){
+    private String facuilty;
+    public user(String Group,int gcode,String facuilty){
     this .group = Group;
     this.gcode = gcode;
+    this.facuilty = facuilty;
     }
     public String groupname(){
     
@@ -23,6 +25,8 @@ class user {
     
     return gcode;
     }
-    
+    public String groupfac(){
+      return facuilty;
+    }
     }
 

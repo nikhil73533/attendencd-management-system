@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.UIManager.getString;
 import javax.swing.table.DefaultTableModel;
@@ -34,7 +35,7 @@ codegen cd = new codegen();
         
          }
    
-public ArrayList<user>userList(){
+public ArrayList<user>getuserList(){
     user user;
 ArrayList<user> userList = null;
        userList =new ArrayList<>();
@@ -47,7 +48,7 @@ ArrayList<user> userList = null;
                 rs = (ResultSet) stmt.executeQuery(query);
                  
                  while(rs.next()){
-                     user = new user(rs.getString("GROUPNAME"),rs.getInt("GROUPCODE"));
+                     user = new user(rs.getString("GROUPNAME"),rs.getInt("GROUPCODE"),rs.getString("FACUILTY"));
                      userList.add(user);
                  }
                 
@@ -61,12 +62,13 @@ ArrayList<user> userList = null;
       return userList;  
 }
 public void show_user(){
-ArrayList<user> list = userList();
+ArrayList<user> list = getuserList();
      DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
-     Object[] row= new Object[2];
-     for(int i = 0; i<row.length;i++){
+     Object[] row= new Object[3];
+     for(int i = 0; i<list.size();i++){
          row[0] = list.get(i).groupname();
          row[1] = list.get(i).groupcode();
+         row[2] = list.get(i).groupfac();
          model.addRow(row);
          
      }
@@ -93,6 +95,10 @@ ArrayList<user> list = userList();
         jButton4 = new javax.swing.JButton();
         GCODE = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        FACUILTY = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,7 +106,7 @@ ArrayList<user> list = userList();
         jLabel1.setText("CREATE GROUP");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("GROUP CODE:-");
+        jLabel2.setText("FACUILTY NAME:-");
 
         jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -109,11 +115,11 @@ ArrayList<user> list = userList();
 
             },
             new String [] {
-                "GROUP NAME", "GROUP CODE"
+                "GROUP NAME", "GROUP CODE", "FACUILTY"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -140,7 +146,7 @@ ArrayList<user> list = userList();
         jButton2.setBackground(new java.awt.Color(211, 84, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 0, 51));
-        jButton2.setText("UPDATE");
+        jButton2.setText("UPDATE GROUP NAME");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -170,6 +176,27 @@ ArrayList<user> list = userList();
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("GROUP NAME:-");
 
+        jButton5.setBackground(new java.awt.Color(246, 36, 89));
+        jButton5.setText("ADD STUDENT");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("GROUP CODE:-");
+
+        jButton6.setBackground(new java.awt.Color(211, 84, 0));
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 0, 51));
+        jButton6.setText("UPDATE FAUILTY NAME");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,27 +204,44 @@ ArrayList<user> list = userList();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(82, 82, 82)
+                                .addGap(191, 191, 191)
                                 .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(15, 15, 15))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(GCODE)
                                     .addComponent(gname, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FACUILTY, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -206,21 +250,29 @@ ArrayList<user> list = userList();
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(GCODE, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GCODE, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel2)
+                    .addComponent(FACUILTY, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
+                    .addComponent(jButton3)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6))
+                .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -230,6 +282,7 @@ ArrayList<user> list = userList();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      gname.setText(null);
      GCODE.setText(null);
+     FACUILTY.setText(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -237,12 +290,12 @@ ArrayList<user> list = userList();
     int cod = Integer.parseInt(GCODE.getText());
     
     try{
-         String query  = "update root.groups set GROUPNAME=? where GROUPCODE=?";
+         String query  = "update root.groups set GROUPNAME=?  where GROUPCODE=?";
         Connection con = con = DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
           PreparedStatement stmt  = con.prepareStatement(query);
           stmt.setString(1,group);
           stmt.setInt(2,cod);
-          
+               
     if(stmt.executeUpdate()==1){
           DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
           model.setRowCount(0);
@@ -265,15 +318,16 @@ ArrayList<user> list = userList();
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
       String group = gname.getText();
+        String FAC = FACUILTY.getText();
     int cod =  cd.code();
     
     try{
-         String query  = "INSERT INTO ROOT.GROUPS(GROUPNAME,GROUPCODE) VALUES (?,?)";
+         String query  = "INSERT INTO ROOT.GROUPS(GROUPNAME,GROUPCODE,FACUILTY) VALUES (?,?,?)";
         Connection con = con = DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
           PreparedStatement stmt  = con.prepareStatement(query);
           stmt.setString(1,group);
           stmt.setInt(2,cod);
-          
+          stmt.setString(3,FAC);
     if(stmt.executeUpdate()>0){
           DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
           model.setRowCount(0);
@@ -329,7 +383,7 @@ ArrayList<user> list = userList();
      TableModel model = jTable1.getModel();
      gname.setText(model.getValueAt(i,0).toString());
       GCODE.setText(model.getValueAt(i,1).toString());
-      
+       FACUILTY.setText(model.getValueAt(i,2).toString());
       
       
       
@@ -337,6 +391,50 @@ ArrayList<user> list = userList();
         
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+       
+         addstudent oj = new addstudent();
+         oj.setVisible(true);
+        oj.pack();
+        oj.setLocationRelativeTo(null);
+        oj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        oj.groups.setText(GCODE.getText());
+        oj.jLabel10.setText(gname.getText());
+        oj.fac.setText(FACUILTY.getText());
+        dispose();      
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+           String group = gname.getText();
+    int cod = Integer.parseInt(GCODE.getText());
+    String fau = FACUILTY.getText();
+    
+    try{
+         String query  = "update root.groups set FACUILTY = ? where GROUPCODE=?";
+        Connection con = con = DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+          PreparedStatement stmt  = con.prepareStatement(query);
+          stmt.setString(1,fau);
+          stmt.setInt(2,cod);
+               
+    if(stmt.executeUpdate()==1){
+          DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
+          model.setRowCount(0);
+          show_user();
+          
+        JOptionPane.showMessageDialog(this, "updated SUCCFULLY");
+        
+    }
+    else{
+         JOptionPane.showMessageDialog(this,"DATA NOT UPDATED");
+    }
+    
+    }catch(Exception ex){
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,15 +472,19 @@ ArrayList<user> list = userList();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField FACUILTY;
     private javax.swing.JTextField GCODE;
     private javax.swing.JTextField gname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

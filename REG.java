@@ -26,6 +26,7 @@ String Name = "";
         initComponents();
     }
 
+           
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -58,6 +59,8 @@ String Name = "";
         REPASS = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         ORG = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        EMAIL = new javax.swing.JTextField();
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,6 +188,10 @@ String Name = "";
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("ORGNIGATION");
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("EMAIL ADDRESS :-");
+
         javax.swing.GroupLayout nameLayout = new javax.swing.GroupLayout(name);
         name.setLayout(nameLayout);
         nameLayout.setHorizontalGroup(
@@ -194,30 +201,32 @@ String Name = "";
                 .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nameLayout.createSequentialGroup()
-                        .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel14)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nameLayout.createSequentialGroup()
+                        .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(nameLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(64, 64, 64)))
+                                .addGap(4, 4, 4)
+                                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
                         .addGap(61, 61, 61)
                         .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(REPASS, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                             .addComponent(NAME)
                             .addComponent(iname)
                             .addComponent(USERNAME)
                             .addComponent(PASS)
-                            .addComponent(REPASS)
-                            .addComponent(ORG, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nameLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))))
+                            .addComponent(ORG, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(EMAIL))
+                        .addGap(28, 28, 28))))
             .addGroup(nameLayout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,22 +245,24 @@ String Name = "";
                     .addComponent(iname, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
+                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(USERNAME))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(nameLayout.createSequentialGroup()
+                        .addComponent(EMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addGap(18, 18, 18)
                 .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(USERNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addGroup(nameLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(PASS, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(nameLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(REPASS, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(PASS, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(REPASS, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(nameLayout.createSequentialGroup()
@@ -294,12 +305,13 @@ String Name = "";
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-             Name = NAME.getText();
+            Name = NAME.getText();
             String Iname = iname.getText();
             String Username = USERNAME.getText();
             String Password = PASS.getText();
             String Repassword = REPASS.getText();
              org = ORG.getText();
+             String email = EMAIL.getText();
             //this for take input from jtextfeild
              if(Name.equals("")){
              JOptionPane.showMessageDialog(null, "Add first name");
@@ -319,6 +331,9 @@ String Name = "";
             else if(org.equals("")){
                  JOptionPane.showMessageDialog(null, "Type name of ogranijation");
             }
+             else if(EMAIL.equals("")){
+             JOptionPane.showMessageDialog(null, "Add EMAIL ADDRESS");
+            }
   
             else{
                
@@ -326,7 +341,7 @@ String Name = "";
            
         try {
            
-            String query  = "INSERT INTO ROOT.REGRESTRATION (NAME, FATHERNAME, USERNAME, PASWORD, REPASWORD, DOB) VALUES (?,?,?,?,?,?)";
+            String query  = "INSERT INTO ROOT.REGRESTRATION (NAME, FATHERNAME, USERNAME, PASWORD, REPASWORD, DOB,EMAIL) VALUES (?,?,?,?,?,?,?)";
              Connection con = con = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
              PreparedStatement stmt  = con.prepareStatement(query);
             
@@ -336,6 +351,7 @@ String Name = "";
              stmt.setString(4,Password);
              stmt.setString(5, Repassword);
              stmt.setString(6, org);
+             stmt.setString(7,email);
              
            if(stmt.executeUpdate()>0){
                             JOptionPane.showMessageDialog(this, "new user added");
@@ -355,6 +371,8 @@ String Name = "";
         }
            
             } 
+
+
             
     
     
@@ -417,6 +435,7 @@ String Name = "";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField EMAIL;
     private javax.swing.JTextField NAME;
     private javax.swing.JTextField ORG;
     private javax.swing.JPasswordField PASS;
@@ -429,6 +448,7 @@ String Name = "";
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

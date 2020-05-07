@@ -94,7 +94,7 @@ public String user;
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 129, Short.MAX_VALUE))
+                        .addGap(0, 239, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,13 +141,16 @@ public String user;
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
       
        if(repass.getText()==jTextField1.getText()){
-       String updateQuery = "update root.regrestration set PASWORD = ? WHERE  username = ?";
+           System.out.println("OK1");
+       String updateQuery = "update root.regrestration set PASWORD = ? WHERE  EMAIL= ?";
            try {
+               System.out.println("OK2");
                con = (Connection) java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
                  stmt= con.prepareStatement(updateQuery);
                  stmt.setString(1, repass.getText());
                  stmt.setString(2, user);
                  if( stmt.executeUpdate()>0){
+                     System.out.println("OK 3 ");
                  JOptionPane.showMessageDialog(this,"Reset Sucessuflly..");
                  
                  }
