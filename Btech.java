@@ -26,6 +26,7 @@ import org.apache.derby.client.am.Statement;
  */
 public class Btech extends javax.swing.JFrame {
 codegen cd = new codegen();
+String  group;
     /**
      * Creates new form Btech
      */
@@ -72,6 +73,28 @@ ArrayList<user> list = getuserList();
          model.addRow(row);
          
      }
+}
+public void ctable(String table) throws SQLException{
+   Connection con = con = DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+    
+    System.out.println("gnema"+table);
+    String query = "CREATE TABLE " +table+"(\n"
+           
+                + "	id integer PRIMARY KEY,\n"
+                + "	name varchar (50) ,\n"
+                + "	rollnumber real\n"
+                + ")";
+         java.sql.Statement stmt = con.createStatement();
+         stmt.execute(query);
+         System.out.println("mja aa gya");
+
+}
+public void delete(String table) throws SQLException{
+    String query = "DROP TABLE "+table+"";
+      Connection con = con = DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+      java.sql.Statement stmt = con.createStatement();
+         stmt.execute(query);
+         System.out.println("mja aa gyaaaaaaaaaaaaa");
 }
 
 
@@ -279,9 +302,9 @@ ArrayList<user> list = getuserList();
                             .addComponent(jLabel3)
                             .addComponent(gname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(GCODE, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(GCODE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -327,7 +350,7 @@ ArrayList<user> list = getuserList();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      String group = gname.getText();
+       group = gname.getText();
     int cod = Integer.parseInt(GCODE.getText());
     
     try{
@@ -373,6 +396,9 @@ ArrayList<user> list = getuserList();
           DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
           model.setRowCount(0);
           show_user();
+          Btech bt = new Btech();
+          bt.ctable(group);
+          
           
         JOptionPane.showMessageDialog(this, "inserted SUCCFULLY");
         
@@ -405,6 +431,8 @@ ArrayList<user> list = getuserList();
           DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
           model.setRowCount(0);
           show_user();
+          Btech bt = new Btech();
+          bt.delete(gp);
           
         JOptionPane.showMessageDialog(this, "DELETED SUCCFULLY");
         

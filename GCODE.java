@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package testapplication;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -11,14 +12,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.apache.derby.client.am.Connection;
 import org.apache.derby.client.am.PreparedStatement;
+import static testapplication.addstudent.addX;
 /**
  *
  * @author nikhil
  */
 public class GCODE extends javax.swing.JFrame {
-
+testclass ojb = new testclass();
+adstd ot =new adstd();
     /**
      * Creates new form GCODE
      */
@@ -35,7 +39,6 @@ public class GCODE extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -44,12 +47,13 @@ public class GCODE extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         reset = new javax.swing.JButton();
         code = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        ROLL = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        fac = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(44, 62, 80));
 
@@ -93,22 +97,24 @@ public class GCODE extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("ROLL NUMBER:-");
+
+        ROLL.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ROLL.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("FACUILTY NAME: - ");
+
+        fac.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        fac.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CODE, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,11 +123,46 @@ public class GCODE extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(117, 117, 117)
+                                .addComponent(jLabel7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fac, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ROLL, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CODE, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(34, 132, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ROLL, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(fac, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CODE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -135,11 +176,6 @@ public class GCODE extends javax.swing.JFrame {
                             .addComponent(reset)
                             .addComponent(code))
                         .addGap(46, 46, 46))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,20 +183,10 @@ public class GCODE extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(169, 169, 169)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(67, 67, 67)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(205, Short.MAX_VALUE)))
         );
 
         pack();
@@ -190,7 +216,6 @@ public class GCODE extends javax.swing.JFrame {
                while (rs.next()){
                if(rs.getString(2).equals(CD)){
                    group gp = new group();
-                JOptionPane.showMessageDialog(null,"NOW YOU ARE ADDED IN ");
                 
                 DESHBORDPANAL des = new DESHBORDPANAL();
                     des.setVisible(true);
@@ -213,6 +238,103 @@ public class GCODE extends javax.swing.JFrame {
             //            Logger.getLogger(Testapplication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ codepanalaprience cod =new codepanalaprience();
+ 
+ 
+ 
+ 
+ 
+ // TODO add your handling code here:
+         String group = CODE.getText().toString();
+        /*groups wale text se bula rhi h */
+        String gr = fac.getText();
+        /*facuilty name fetch kr rha h*/
+        String ROLLNUMBER = ROLL.getText();
+           /*rollnumber fetch kr rha h*/
+         String gp = String.valueOf(group);
+            /* ye string me convert kr rha h*/
+            String Group = "SELECT GROUPNAME FROM  ROOT.GROUPS WHERE  FACUILTY= '"+gr+"'";
+            /*ye line data bese se group name fetch kr rhi h*/
+           String Gorp = null;
+           /* inilization of group variable*/
+           String col ="GROUPNAME";
+           /* col nmae fetch kr rha h*/
+          String op = null;
+        try {
+            op = cod.nik(ROLLNUMBER);
+        } catch (SQLException ex) {
+            Logger.getLogger(GCODE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           /*ye nik name ke lable se value fetch kr rha h*/
+              String arr[]=  {op};
+              for(int i = 0; i<arr.length;i++){
+                  System.out.println("this is arrr "+arr);
+              }
+              /*array me data base table se selected value fetch kr rha h*/
+        try {
+            
+            Gorp = ojb.adminuser(Group,col);
+            /*ye fetch kr rha h group name*/
+        } catch (SQLException ex) {
+            Logger.getLogger(addstudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+       
+        try {
+            
+            System.out.println("OK1");
+             String query  = "update root.students set GROUPS = ? where ROLLNUMBER = ?";
+             /*query of update */
+        java.sql.Connection con;
+            con = con = DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+            /*connection establising from data base */
+             java.sql.PreparedStatement stmt  = con.prepareStatement(query);
+             /*fetch statment from datat base*/
+         arr = addX(arr.length,arr,Gorp);
+         /*array me append kr rhe h*/
+         for(int i = 0; i<arr.length;i++){
+          System.out.println(arr[i]);
+          /*print kr rhe h*/
+         }
+           
+        String Groups = ot.group(arr);
+        /*array element ko string me convert kr rhe h*/
+            System.out.println("this is string"+Groups);
+          stmt.setString(1, Groups);
+           stmt.setString(2,ROLLNUMBER);
+          /*group and rollnumber ko compair kr rhe h database wale group name se*/
+          Groups = null;
+          /*group value ko null kr rhe h*/
+         
+          System.out.println("OK3");
+           arr = null;
+            System.out.println(arr);/* array ki sari value ko null kr rhe h*/
+        System.out.println(arr);
+            System.out.println("OK4");
+           if(stmt.executeUpdate()==1){
+              JOptionPane.showMessageDialog(this, "new user added");
+         
+           
+           }} catch(SQLException ex){
+             System.out.println(ex);
+         }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
             
 
            
@@ -255,12 +377,15 @@ public class GCODE extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CODE;
+    public javax.swing.JLabel ROLL;
     private javax.swing.JButton code;
+    public javax.swing.JLabel fac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables

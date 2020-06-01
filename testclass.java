@@ -33,8 +33,31 @@ public class testclass {
            
             
   }
-    public static void main(String []args){
- 
-    
-     
-}
+  void check() throws SQLException{
+  
+   String query  = "SELECT * FROM ROOT.STUDENTS";
+             java.sql.Connection con  = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
+            PreparedStatement stmt  = con.prepareStatement(query);
+            java.sql.ResultSet rs;
+            rs = stmt.executeQuery();
+            rs.next();
+            
+            String col = rs.getString("GROUPS");
+            String roll = rs.getString(2);
+            System.out.println("roll"+roll);
+            
+           System.out.println("col"+col);
+           if(roll=="2019btechcse033"){
+                String NAME = rs.getString("NAME");
+                
+                System.out.println("name"+NAME);
+           }
+  
+  
+  }
+    public static void main(String []args) throws SQLException{
+       testclass tt = new testclass();
+       tt.check();
+        
+        
+}}

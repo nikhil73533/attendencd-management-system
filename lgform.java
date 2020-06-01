@@ -29,7 +29,7 @@ testclass tt = new testclass();
      String que  = "SELECT FATHERNAME FROM  ROOT.REGRESTRATION WHERE USERNAME = '"+ username.getText()+"'";
             String col = "FATHERNAME";
            String rollnumber= tt.adminuser(que, col);
-      
+            
        
       String query  = "SELECT * FROM ROOT.STUDENTS WHERE ROLLNUMBER = ?";
              java.sql.Connection con  = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");
@@ -59,7 +59,15 @@ testclass tt = new testclass();
             con.close();
                  return str;
        
-        } 
+        }
+    String post() throws SQLException{
+         String QUE  = "SELECT POST FROM  ROOT.REGRESTRATION WHERE USERNAME = '"+ username.getText()+"'";
+            String COL= "POST";
+           String post= tt.adminuser(QUE, COL);
+            System.out.println("post"+post);
+            return post;
+      
+     }
 
 
     /**
@@ -89,6 +97,7 @@ testclass tt = new testclass();
         jLabel10 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         FPASS = new javax.swing.JLabel();
+        post = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
@@ -240,6 +249,10 @@ testclass tt = new testclass();
             }
         });
 
+        post.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        post.setForeground(new java.awt.Color(255, 255, 255));
+        post.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 102, 51), null));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -271,8 +284,12 @@ testclass tt = new testclass();
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(FPASS, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(95, 95, 95))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -281,11 +298,13 @@ testclass tt = new testclass();
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel8)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(post, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -347,30 +366,52 @@ testclass tt = new testclass();
         }
         else{
         try {
+            String QUE= "SELECT POST FROM  ROOT.REGRESTRATION WHERE USERNAME = '"+ username.getText()+"'";
+            String COL= "POST";
+           String post=  tt.adminuser(QUE, COL);
+      
+       
             String query  = "SELECT * FROM ROOT.REGRESTRATION WHERE USERNAME = ? AND PASWORD = ?  ";
              Connection con = con = java.sql.DriverManager.getConnection("jdbc:derby://localhost:1527/student","Root","root");            PreparedStatement stmt  = con.prepareStatement(query);
             ResultSet rs;
             String user= username.getText();
             String pass = String.valueOf(password.getText());
             
+            
            stmt.setString(1,user);
            stmt.setString(2, pass);
+           
             rs = stmt.executeQuery();
             
+        
             while (rs.next()){
                 String si = "ADMIN";
                 String pi = "USER";
+                String gi = "TEACHER";
+                String li = "OTHER";
                if(rs.getString(3).equals(user)&& rs.getString(4).equals(pass)){
                    if(si.equals(option)){
-                       
                     JOptionPane.showMessageDialog(this, "logine successfully");
                     
-                    Admin ad = new Admin();
+                    if( gi.equals(post)){
+                              addteacher ad = new addteacher();
+                     ad.setLocationRelativeTo(null);
+                    ad.setVisible(true);
+                    setVisible(false);
+                    ad.NAME.setText(rs.getString(4));
+                    dispose();
+                    break;
+                    
+                    }
+                    else if(li.equals(post)){
+                         Admin ad = new Admin();
                      ad.setLocationRelativeTo(null);
                     ad.setVisible(true);
                     setVisible(false);
                     dispose();
                     break;
+                    }
+                   
                    }
                 
                    else if(pi.equals(option)){
@@ -390,6 +431,7 @@ testclass tt = new testclass();
         String    idnumber = tt.adminuser(que, col);
             String quer = "SELECT DOB FROM  ROOT.REGRESTRATION WHERE  USERNAME= '"+ username.getText()+"'";
             String co= "DOB";
+            
             String ogr = tt.adminuser(quer, co);
                          DESHBORDPANAL des = new DESHBORDPANAL();
                     des.setVisible(true);
@@ -512,6 +554,7 @@ testclass tt = new testclass();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField password;
+    public javax.swing.JLabel post;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

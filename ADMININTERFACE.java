@@ -264,7 +264,7 @@ testclass td = new testclass();
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        Report nik = new Report();
+        teacher nik = new teacher();
 
         nik.setVisible(true);
         nik.pack();

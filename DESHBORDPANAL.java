@@ -267,7 +267,7 @@ public class DESHBORDPANAL extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        Report nik = new Report();
+        teacher nik = new teacher();
 
         nik.setVisible(true);
         nik.pack();
@@ -282,7 +282,7 @@ public class DESHBORDPANAL extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         group bt = new group();
-
+           bt.roll.setText(idnum.getText());
         bt.setVisible(true);
         bt.pack();
         bt.setLocationRelativeTo(null);
